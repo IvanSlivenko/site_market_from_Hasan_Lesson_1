@@ -25,7 +25,45 @@ pip install -r requirements.txt
 (myenv) D:\GitHub\site_market_from_Hasan_Lesson_1>python manage.py startapp shop
 
 
+8
 https://bootstrapious.com/p/boutique-bootstrap-e-commerce-template
+
+9
+
+models.py
+
+create models
+
+10
+(myenv) D:\GitHub\site_market_from_Hasan_Lesson_1>python manage.py makemigrations
+
+(myenv) D:\GitHub\site_market_from_Hasan_Lesson_1>python manage.py migrate
+
+(myenv) D:\GitHub\site_market_from_Hasan_Lesson_1>python manage.py createsuperuser
+
+11
+python manage.py runserver
+
+
+12
+
+global urls.py
+
+13
+
+local urls.py
+
+14
+
+admin. py
+
+
+
+
+
+
+
+
 
 
 
@@ -40,4 +78,4 @@ https://bootstrapious.com/p/boutique-bootstrap-e-commerce-template
 
 
 =======================================
-30 : 04
+01: 00 : 21
