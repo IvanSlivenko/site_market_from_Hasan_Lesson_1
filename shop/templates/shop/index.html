@@ -3,3 +3,30 @@
 {% block title %}
     {{ title }}     
 {% endblock title %}
+
+{% block main %}
+    <main>
+            <!--  Modal -->
+            {% include 'components/_modal.html' %}
+
+            <!-- HERO SECTION-->
+
+        <div class="container">
+                <!--Банер головна сторінка -->
+            {% include "shop/components/_baner.html" %}
+
+                <!-- CATEGORIES SECTION-->
+            {% include "shop/components/_categories.html" %}
+
+                <!-- TRENDING PRODUCTS-->
+            {% include "shop/components/_trending_products.html" %}    
+
+                <!-- SERVICES-->
+            {% include "shop/components/_servises.html" %}   
+
+                <!-- NEWSLETTER-->
+            {% include "shop/components/_newsletter.html" %}      
+
+        </div>
+    </main>      
+{% endblock main %}

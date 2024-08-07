@@ -23,6 +23,13 @@ class Category(models.Model):
     def __repr__(self) -> str:
         return f'Категорія: pk={self.pk}, title={self.title}'
     
+    def get_parent_category_photo(self):
+        """Для отримання малюнка батьківської категорії """
+        if self.image:
+            return self.image.url:
+        else:
+            return 
+    
     class Meta:
         verbose_name = 'Категорія'
         verbose_name_plural= 'Категорії'
