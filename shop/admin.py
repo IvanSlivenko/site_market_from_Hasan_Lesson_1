@@ -47,12 +47,16 @@ class ProductAdmin(admin.ModelAdmin):
 
     def get_photo(self, obj):
         if obj.images.all():
+            print(obj.images.all(),'-------------0')
+            print(obj.images.all()[0],'-------1')
+            print(obj.images.all()[0].image, '-------------image---2')
+            print(obj.images.all()[0].image.url, '--------------- url------3')
             return mark_safe(f'<img src="{obj.images.all()[0].image.url}" width="75">')
-            # return str(obj.images.all()[0])
+            
         else:
             return '-'
 
-    get_photo.short_description='Фото міні'
+    get_photo.short_description='Мініфото'
 
 admin.site.register(Gallery)
 

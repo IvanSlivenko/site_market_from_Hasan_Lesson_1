@@ -1,3 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from  django.views.generic import ListView, DetailView
 
-# Create your views here.
+from .models import Category, Product
+
+
