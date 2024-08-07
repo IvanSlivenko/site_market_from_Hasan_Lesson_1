@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>
+        {% block title %}
+        
+        {% endblock title %}
+
+        
+    </title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <!-- gLightbox gallery-->
+    {% include 'shop/components/_style.html' %}
+    
+  </head>
+  <body>
+    <div class="page-holder">
+      <!-- navbar-->
+      {% include 'shop/components/_navbar.html' %}
+ 
+      <!--  Modal -->
+      {% include 'shop/components/_modal.html' %}
+
+      <!-- HERO SECTION-->
+      {% include 'shop/components/_hero.html' %}
+
+      <!-- footer-->
+      {% include 'shop/components/_footer.html' %}
+
+      <!-- JavaScript files-->
+      {% include 'shop/components/_javaScript.html' %}
+      
+      <!-- FontAwesome CSS - loading as last, so it doesn't block rendering-->
+      {% include 'shop/components/_css.html' %}
+    
+    </div>
+  </body>
+</html>
