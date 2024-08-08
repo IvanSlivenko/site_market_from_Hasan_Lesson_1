@@ -15,7 +15,8 @@ class Category(models.Model):
                                related_name='subcategories')
     
     def get_absolute_url(self):
-        pass
+        """Посилання на сторінку категорій"""
+        return reverse('category_detail', kwargs={'slug': self.slug})
 
     def __str__(self) -> str:
         return self.title
@@ -26,9 +27,9 @@ class Category(models.Model):
     def get_parent_category_photo(self):
         """Для отримання малюнка батьківської категорії """
         if self.image:
-            return self.image.url:
+            return self.image.url
         else:
-            return 
+            return 'https://korobkionline.com.ua/content/images/33/390x390l95mc0/68619443721548.webp'
     
     class Meta:
         verbose_name = 'Категорія'
