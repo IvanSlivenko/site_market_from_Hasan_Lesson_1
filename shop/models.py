@@ -50,7 +50,15 @@ class Product(models.Model):
     
 
     def get_absolute_url(self):
+        # return reverse('category_detail', kwargs={'slug': self.slug})
         pass
+
+    def get_first_photo(self):
+        if self.images.first():
+            return self.images.first().image.url
+        else:
+            return 'https://korobkionline.com.ua/content/images/33/390x390l95mc0/68619443721548.webp'
+           
 
     def __str__(self) -> str:
         return self.title

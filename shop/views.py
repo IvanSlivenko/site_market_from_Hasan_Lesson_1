@@ -1,3 +1,4 @@
+from typing import Any
 from django.shortcuts import render, redirect
 from  django.views.generic import ListView, DetailView
 
@@ -14,6 +15,11 @@ class Index(ListView):
         """render батьківської категорії"""
         categories = Category.objects.filter(parent=None)
         return categories
+    def get_context_data(self, **kwargs):
+        """Виведення на сторінку додаткових елементів"""
+        context = super().get_context_data() # context = {}
+        context['top_products'] = Product.objects.order_by('-watched')[:8]
+        return context
     
 class SubCategories(ListView):
     """Вивід підкатегорії на окремій сторінці"""
