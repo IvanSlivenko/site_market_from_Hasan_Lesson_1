@@ -33,6 +33,15 @@ class SubCategories(ListView):
         subcategories = parent_category.subcategories.all()
         products = Product.objects.filter(category__in = subcategories).order_by('?')
         return products
+    
+    def get_context_data(self, **kwargs):
+        """Додаткові елементи"""
+        context = super().get_context_data() # context = {}
+        parent_category = Category.objects.get(slug=self.kwargs['slug'])
+        context['category'] = parent_category
+        context['title'] = parent_category.title
+        return context
+     
 
 
 

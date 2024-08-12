@@ -1,13 +1,18 @@
 
 <section class="py-5">
   <header>
-    <p class="small text-muted small text-uppercase mb-1">Made the hard way</p>
-    <h2 class="h5 text-uppercase mb-4">Top trending products</h2>
+    <p class="small text-muted small text-uppercase mb-1">Здійсгіть свій вибір</p>
+    <h2 class="h5 text-uppercase mb-4">Популярні товари</h2>
   </header>
   <div class="row" >
     {% for product in top_products %}
     <!-- PRODUCT-->
-    <div class="col-xl-3 col-lg-4 col-sm-6">
+    <div class="col-xl-3 col-lg-4 col-sm-6"
+    style="
+      padding: 0;
+      margin: 0;
+      "
+    >
       {% include "shop/components/_product_cart.html" %}
     </div>
     {% endfor %}
