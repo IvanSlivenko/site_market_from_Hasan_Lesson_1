@@ -4,12 +4,12 @@
     <p class="small text-muted small text-uppercase mb-1">Made the hard way</p>
     <h2 class="h5 text-uppercase mb-4">Top trending products</h2>
   </header>
-  <div class="row">
+  <div class="row" >
     {% for product in top_products %}
     <!-- PRODUCT-->
     <div class="col-xl-3 col-lg-4 col-sm-6">
       {% include "shop/components/_product_cart.html" %}
     </div>
     {% endfor %}
-
+  </div>
 </section>
