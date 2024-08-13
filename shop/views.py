@@ -29,6 +29,12 @@ class SubCategories(ListView):
 
     def get_queryset(self):
         """Отримання  всіх товарі підкатегорії"""
+        type_fild = self.request.GET.get('type')
+        if type_fild:
+            products = Product.objects.filter(category__slug=type_fild)
+            return products
+
+
         parent_category = Category.objects.get(slug=self.kwargs['slug'])
         subcategories = parent_category.subcategories.all()
         products = Product.objects.filter(category__in = subcategories).order_by('?')
