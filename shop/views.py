@@ -56,6 +56,13 @@ class SubCategories(ListView):
         context['title'] = parent_category.title
         return context
      
+class ProductPage(DetailView):
+    """Вивід товара на окремій сторінці"""
+
+    model = Product
+
+    context_object_name = 'product'
+    template_name = 'shop/product_page.html'
 
 
 
