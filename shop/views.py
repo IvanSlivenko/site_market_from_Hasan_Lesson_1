@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from  django.views.generic import ListView, DetailView
 
 from .models import Category, Product
-from .forms import LoginForm, RegistrationForm
+from .forms import FeedbackForm, LoginForm, RegistrationForm
 
 class Index(ListView):
     """Головна сторінка"""
@@ -98,6 +98,14 @@ def login_registration(request):
               }
 
     return render (request, 'shop/login_requestion.html', context)
+
+def feedback(request):
+    context= {'title': 'Відправити відгук',
+              'feedback_form': FeedbackForm,
+
+              }
+
+    return render (request, 'shop/feed_back.html', context)
 
 
 

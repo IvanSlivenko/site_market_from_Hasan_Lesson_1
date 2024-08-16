@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{ title }}
+{% endblock title %}
+
+{% block main %}
+<main>
+    <div class="container d-flex justify-content-around" >
+        <div class="login">
+            <h2 class="form-title">Створити відгук</h2>
+            <form action="" class="login-form" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{ feedback_form.username }}
+
+                </div>
+
+                <div class="form-group">
+                    {{ feedback_form.number_phone }}
+                </div>
+
+                <div class="form-group">
+                    {{ feedback_form.text_feedback }}
+                </div>
+
+                <button class="btn btn-primary" type="submit">Відправити відгук</button>
+            </form>
+        </div>
+        
+
+            </form>
+        </div>
+    </div>
+</main>
+{% endblock main %}
