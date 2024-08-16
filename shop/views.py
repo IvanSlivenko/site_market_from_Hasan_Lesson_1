@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from  django.views.generic import ListView, DetailView
 
 from .models import Category, Product
+from .forms import LoginForm, RegistrationForm
 
 class Index(ListView):
     """Головна сторінка"""
@@ -91,7 +92,11 @@ class ProductPage(DetailView):
     
 
 def login_registration(request):
-    context= {'title': 'Увійти чи зареєструватись'}
+    context= {'title': 'Увійти чи зареєструватись',
+              'login_form': LoginForm,
+              'registration_form': RegistrationForm
+              }
+
     return render (request, 'shop/login_requestion.html', context)
 
 
