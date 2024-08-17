@@ -2,6 +2,8 @@ from random import randint
 from typing import Any
 from django.shortcuts import render, redirect
 from  django.views.generic import ListView, DetailView
+from django.contrib.auth import login, logout
+from django.contrib import messages
 
 from .models import Category, Product
 from .forms import FeedbackForm, LoginForm, RegistrationForm
@@ -109,9 +111,36 @@ def feedback(request):
 
 
 
-       
+def user_login(request):
+    """Аутентифікація користувача"""
+    form = LoginForm(data=request.POST)
+    if form.is_valid():
+        user = form.get_user()
+        login(request, user)
+        return redirect('index')
+    else:
+        messages.error(request, "Перевірте ім'я та пароль" )    
+        return redirect('login_registration')
+
+
+
+def user_logout(request):
+    """Вихід користувача"""
+    logout(request)
+    return redirect('index')
            
-       
+def user_registration(request):
+    """Регістрація користувача"""
+    form = RegistrationForm(data = request.POST)
+    if form.is_valid():
+        form.save()
+        messages.success(request, 'Акаунт користувача успішно створено')
+    else:
+        messages.error(request, 'Перевірте поля форми') 
+
+    return redirect('login_registration')       
+
+
 
 
 

@@ -14,14 +14,25 @@
             
             
           </ul>
-          <ul class="navbar-nav ms-auto">  
-                        
+          <ul class="navbar-nav ms-auto">                
             <li class="nav-item"><a class="nav-link" href="cart.html"> <i class="fas fa-dolly-flatbed me-1 text-gray"></i>Cart<small class="text-gray fw-normal">(2)</small></a></li>
             <li class="nav-item"><a class="nav-link" href="#!"> <i class="far fa-heart me-1"></i><small class="text-gray fw-normal"> (0)</small></a></li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'login_registration' %}"> <i class="fas fa-user me-1 text-gray fw-normal"></i>
-                Увійти чи зареєструватись
-              </a></li>
+
+            {% if request.user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'user_logout' %}"> <i class="fas fa-user me-1 text-gray fw-normal"></i>
+                  Вийти
+                </a>
+              </li>
+            {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'login_registration' %}"> <i class="fas fa-user me-1 text-gray fw-normal"></i>
+                  Увійти чи зареєструватись
+                </a>
+              </li>
+              
+            {% endif %}
+          
           </ul>
         </div>
       </nav>
