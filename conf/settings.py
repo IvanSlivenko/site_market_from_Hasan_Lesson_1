@@ -1,4 +1,7 @@
 import os
+from dotenv import *
+
+load_dotenv()
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -40,6 +43,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'shop.apps.ShopConfig',
+    'rosetta',
     'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -92,6 +96,16 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'shop',
+#         'USER': 'postgres',
+#         'PASSWORD':'admin',
+#         'HOST': '127.0.0.1',
+#         'PORT': 5432
+#     }
+# }
 
 
 # Password validation
@@ -116,7 +130,19 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-uk'
+# LANGUAGE_CODE = 'en-uk'
+LANGUAGE_CODE = 'uk'
+
+LANGUAGES = [
+    ('uk', 'Ukrainian'),
+    ('en', 'English'),
+]
+
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale'),
+]
+
+
 
 TIME_ZONE = 'UTC'
 

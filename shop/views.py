@@ -136,7 +136,12 @@ def user_registration(request):
         form.save()
         messages.success(request, 'Акаунт користувача успішно створено')
     else:
-        messages.error(request, 'Перевірте поля форми') 
+        for error in form.errors:
+            messages.error(request, form.errors[error].as_text())
+
+        
+            
+        # messages.error(request, 'Перевірте поля форми') 
 
     return redirect('login_registration')       
 

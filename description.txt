@@ -67,7 +67,17 @@ https://youtu.be/hDNsZS9_U7g
 https://youtu.be/kyTAgXsdeeE
 
 
+pgsql
 
+password admin
+port 5432
+
+------------------------------------ Part 4
+https://youtu.be/Ygcqd80Wm_M
+
+pip install python-dotenv
+
+pip freeze requirements.txt
 
 =======================================
-02 : 05 : 52
+00 : 10 : 25

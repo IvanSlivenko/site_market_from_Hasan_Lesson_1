@@ -7,6 +7,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('shop.urls')),
+    path('rosetta/', include('rosetta.urls')),
 ]
 
 if settings.DEBUG:
