@@ -80,4 +80,4 @@ pip install python-dotenv
 pip freeze requirements.txt
 
 =======================================
-00 : 10 : 25
+00 : 21 : 17

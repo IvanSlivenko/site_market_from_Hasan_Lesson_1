@@ -31,10 +31,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-a42wbsu@#1yrp(394ff%ffj&!60=7$*pf_5oiz$k5hz^w7q38!'
+SECRET_KEY = os.getenv('SECRET_KEY')
+# SECRET_KEY = 'django-insecure-a42wbsu@#1yrp(394ff%ffj&!60=7$*pf_5oiz$k5hz^w7q38!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = bool(int(os.getenv('DEBUG')))
 
 ALLOWED_HOSTS = []
 
@@ -99,11 +100,12 @@ DATABASES = {
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'shop',
-#         'USER': 'postgres',
-#         'PASSWORD':'admin',
-#         'HOST': '127.0.0.1',
-#         'PORT': 5432
+#         'NAME': os.getenv('DB_NAME'),
+#         'USER': os.getenv('DB_USER'),
+#         'PASSWORD': os.getenv('DB_PASSWORD'),
+#         'HOST': os.getenv('DB_HOST'),
+#         'PORT': int(os.getenv('DB_PORT')),
+
 #     }
 # }
 
