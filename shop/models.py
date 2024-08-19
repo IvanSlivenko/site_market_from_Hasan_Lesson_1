@@ -81,3 +81,16 @@ class Gallery(models.Model):
         verbose_name = 'Зображення'
         verbose_name_plural= 'Галерея зображень'
 
+class Review(models.Model):
+    """Модель для відгуків"""
+    text = models.TextField(verbose_name='Текст')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Автор')
+    author = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='Продукт')
+    created_at = models.DateField(auto_now_add=True, verbose_name='Дата створення')
+
+    def __str__(self):
+        return self.author.username
+    
+    class Meta:    
+        verbose_name = 'Відгук'
+        verbose_name_plural = 'Відгуки'

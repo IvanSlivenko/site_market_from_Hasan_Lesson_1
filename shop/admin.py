@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Product, Category, Gallery
+from .models import Product, Category, Gallery, Review
 from django.utils.safestring import mark_safe
 
 
@@ -44,6 +44,7 @@ class ProductAdmin(admin.ModelAdmin):
     list_filter = ('title', 'price')
     list_display_links=('pk', 'title', )
     inlines = (GallerryInline,)
+    readonly_fields=('watched',)
 
     def get_photo(self, obj):
         if obj.images.all():
@@ -59,5 +60,21 @@ class ProductAdmin(admin.ModelAdmin):
     get_photo.short_description='Мініфото'
 
 admin.site.register(Gallery)
+
+@admin.register(Review)
+class ReviewAdmin(admin.ModelAdmin):
+    """Відображення відгуків в адмінці"""
+    list_display=(
+        'pk',
+        'author',
+        'created_at'
+    )
+    readonly_fields=('pk',
+        'author',
+        'created_at'
+        )
+    
+
+    
 
 

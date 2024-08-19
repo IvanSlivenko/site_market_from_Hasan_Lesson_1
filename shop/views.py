@@ -6,7 +6,7 @@ from django.contrib.auth import login, logout
 from django.contrib import messages
 
 from .models import Category, Product
-from .forms import FeedbackForm, LoginForm, RegistrationForm
+from .forms import FeedbackForm, LoginForm, RegistrationForm, ReviewForm
 
 class Index(ListView):
     """Головна сторінка"""
@@ -88,6 +88,9 @@ class ProductPage(DetailView):
 
            
        context['products'] = data
+       
+       if self.request.user.is_authenticated:
+           context['review_form'] = ReviewForm
 
 
        return context

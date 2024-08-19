@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserModel
 
-from .models import Category, Product, Gallery
+from .models import Category, Product, Gallery, Review
 
 class LoginForm(AuthenticationForm):
     """Аутентифікація користувача"""
@@ -40,5 +40,16 @@ class FeedbackForm(AuthenticationForm):
     number_phone = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control',
                                                              'placeholder': "Номер телефону"   
                                                              }))
+    
+class ReviewForm(forms.ModelForm):
+    """Форма для відгуків"""
+    class Meta:
+        model = Review
+        fields = ('text',)
+        widgets= {
+            'text': forms.Textarea(attrs={'class': 'form-control',
+                                            'placeholder': "Чекаємо на ваш важливий відгук"
+                                            }),                                           
+        }
 
 
