@@ -24,6 +24,11 @@
                   Вийти
                 </a>
               </li>
+              <li class="nav-item">
+                <p class="nav-link">
+                  Вітаємо : {{ request.user }}  
+              </p>
+              </li>
             {% else %}
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'login_registration' %}"> <i class="fas fa-user me-1 text-gray fw-normal"></i>

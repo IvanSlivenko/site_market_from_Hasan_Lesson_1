@@ -1,6 +1,6 @@
 from random import randint
 from typing import Any
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from  django.views.generic import ListView, DetailView
 from django.contrib.auth import login, logout
 from django.contrib import messages
@@ -146,7 +146,21 @@ def user_registration(request):
             
         # messages.error(request, 'Перевірте поля форми') 
 
-    return redirect('login_registration')       
+    return redirect('login_registration')
+
+
+
+
+def save_review(request, product_pk):
+    """Збереження  відгука"""
+    form = ReviewForm(data=request.POST)
+    if form.is_valid():
+        review = form.save(commit=False)
+        review.author=request.user
+        product = Product.objects.get(pk=product_pk)
+        review.product = product
+        review.save()
+        return redirect('product_page', product.slug)
 
 
 

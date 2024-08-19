@@ -85,7 +85,7 @@ class Review(models.Model):
     """Модель для відгуків"""
     text = models.TextField(verbose_name='Текст')
     author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Автор')
-    author = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='Продукт')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='Продукт')
     created_at = models.DateField(auto_now_add=True, verbose_name='Дата створення')
 
     def __str__(self):

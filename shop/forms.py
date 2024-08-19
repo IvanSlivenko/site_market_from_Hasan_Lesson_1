@@ -48,7 +48,7 @@ class ReviewForm(forms.ModelForm):
         fields = ('text',)
         widgets= {
             'text': forms.Textarea(attrs={'class': 'form-control',
-                                            'placeholder': "Чекаємо на ваш важливий відгук"
+                                            'placeholder': "Ваш відгук для нас важливий"
                                             }),                                           
         }
 
