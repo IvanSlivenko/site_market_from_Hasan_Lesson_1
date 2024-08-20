@@ -5,7 +5,7 @@ from  django.views.generic import ListView, DetailView
 from django.contrib.auth import login, logout
 from django.contrib import messages
 
-from .models import Category, Product
+from .models import Category, Product, Review
 from .forms import FeedbackForm, LoginForm, RegistrationForm, ReviewForm
 
 class Index(ListView):
@@ -88,6 +88,7 @@ class ProductPage(DetailView):
 
            
        context['products'] = data
+       context['reviews'] = Review.objects.filter(product=product).order_by('-pk')
        
        if self.request.user.is_authenticated:
            context['review_form'] = ReviewForm

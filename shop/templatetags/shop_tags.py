@@ -1,5 +1,7 @@
 from django import template
 from shop.models import Category
+from  django.template.defaulttags import register as range_register 
+
 
 register = template.Library()
 
@@ -34,6 +36,15 @@ def get_sorted():
     ]
 
     return sortes
+
+@range_register.filter
+def get_positive_range(value):
+    return range(int(value))
+
+@range_register.filter
+def get_negative_range(value):
+    return range(5 - int(value))
+
 
 
 

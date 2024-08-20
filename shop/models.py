@@ -81,9 +81,20 @@ class Gallery(models.Model):
         verbose_name = 'Зображення'
         verbose_name_plural= 'Галерея зображень'
 
+
+CHOICES = (
+    ('5','Відмінно'),
+    ('4','Добре'),
+    ('3','Нормально'),
+    ('2','Не добре'),
+    ('1','Жахливо'),
+)
+
+
 class Review(models.Model):
     """Модель для відгуків"""
-    text = models.TextField(verbose_name='Текст')
+    text = models.TextField(verbose_name='Ваш можливий відгук')
+    grade = models.CharField(max_length=20, choices=CHOICES,blank=True, null=True, verbose_name='Оцінка')
     author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Автор')
     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='Продукт')
     created_at = models.DateField(auto_now_add=True, verbose_name='Дата створення')
@@ -94,3 +105,10 @@ class Review(models.Model):
     class Meta:    
         verbose_name = 'Відгук'
         verbose_name_plural = 'Відгуки'
+
+class FavoriteProducts(models.Model):
+    """Модель для обраних товарів"""
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Користувач')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='Товар')
+
+

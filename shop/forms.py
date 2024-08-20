@@ -45,10 +45,13 @@ class ReviewForm(forms.ModelForm):
     """Форма для відгуків"""
     class Meta:
         model = Review
-        fields = ('text',)
+        fields = ('text','grade',)
         widgets= {
             'text': forms.Textarea(attrs={'class': 'form-control',
                                             'placeholder': "Ваш відгук для нас важливий"
+                                            }),
+            'grade': forms.Select(attrs={'class': 'form-control',
+                                            'placeholder': "Ваша оцінка"
                                             }),                                           
         }
 
