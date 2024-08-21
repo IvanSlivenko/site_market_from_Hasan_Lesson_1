@@ -79,5 +79,10 @@ pip install python-dotenv
 
 pip freeze requirements.txt
 
+------------------------------------ Part 5 
+https://youtu.be/vXyUggwyv6k
+
+
+
 =======================================
-02 : 46 : 49
+00 : 41 : 57

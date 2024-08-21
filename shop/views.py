@@ -5,6 +5,7 @@ from  django.views.generic import ListView, DetailView
 from django.contrib.auth import login, logout
 from django.contrib import messages
 
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Category, Product, Review, FavoriteProducts
 from .forms import FeedbackForm, LoginForm, RegistrationForm, ReviewForm
 
@@ -47,9 +48,6 @@ class SubCategories(ListView):
         if sort_field:
             products = products.order_by(sort_field)
             
-
-
-
         return products
     
     def get_context_data(self, **kwargs):
@@ -182,6 +180,24 @@ def save_favorite_product(request, product_slug):
         return redirect(next_page)
 
 
+
+class FavoriteProductsViews(LoginRequiredMixin,ListView):
+    """Для виведення обраних сторінок"""
+    
+    model = FavoriteProducts
+    context_object_name = 'products'
+    template_name = 'shop/favorite_products.html'
+    login_url = 'login_registration'
+
+    def get_queryset(self):
+        """Отримуємо товари конкретного користувача"""
+        user = self.request.user
+        favs = FavoriteProducts.objects.filter(user=user)
+        products = [i.product for i in favs] 
+        return  products
+    
+
+    
 
 
 

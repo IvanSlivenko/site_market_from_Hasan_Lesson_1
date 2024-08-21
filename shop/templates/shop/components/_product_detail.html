@@ -1,3 +1,4 @@
+{% load shop_tags %}
 <div class="col-lg-6">
   {% comment %} <ul class="list-inline mb-2 text-sm">
     <li class="list-inline-item m-0"><i class="fas fa-star small text-warning"></i></li>
@@ -11,7 +12,19 @@
   <p class="text-sm mb-4">{{ product.description}}</p>
   <div class="row align-items-stretch mb-4">
     <div class="col-sm-3 pl-sm-0"><a class="btn btn-dark btn-sm btn-block h-100 d-flex align-items-center justify-content-center px-0" href="cart.html">Додати до кошика</a></div>
-  </div><a class="text-dark p-0 mb-4 d-inline-block" href="#!"><i class="far fa-heart me-2"></i>Додати до обраного</a><br>
+  </div>
+    {% if request.user.is_authenticated %}
+      {% get_favorite_products request.user as fav_products %}
+    {% endif %}
+
+    {% if product in fav_products and request.user.is_authenticated %}
+     <a class="text-dark p-0 mb-4 d-inline-block" href="{% url "add_favorite" product.slug %}"><i class="fas far fa-heart me-2" style="color: black;"></i>Забрати з обраного</a><br>
+    {% else %}
+      <a class="text-dark p-0 mb-4 d-inline-block" href="{% url "add_favorite" product.slug %}"><i class=" far fa-heart me-2" ></i>Додати до обраного</a><br>
+    {% endif %}
+
+    
+    
   <ul class="list-unstyled small d-inline-block">
     <li class="px-3 py-2 mb-1 bg-white"><strong class="text-uppercase">В наявності:</strong><span class="ms-2 text-muted">{{ product.quantity}}</span></li>
     <li class="px-3 py-2 mb-1 bg-white text-muted"><strong class="text-uppercase text-dark">Категорія:</strong><a class="reset-anchor ms-2" href="#!">{{ product.category }}</a></li>
