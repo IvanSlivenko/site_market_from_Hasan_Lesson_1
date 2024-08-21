@@ -5,7 +5,7 @@ from  django.views.generic import ListView, DetailView
 from django.contrib.auth import login, logout
 from django.contrib import messages
 
-from .models import Category, Product, Review
+from .models import Category, Product, Review, FavoriteProducts
 from .forms import FeedbackForm, LoginForm, RegistrationForm, ReviewForm
 
 class Index(ListView):
@@ -162,6 +162,24 @@ def save_review(request, product_pk):
         review.product = product
         review.save()
         return redirect('product_page', product.slug)
+
+
+def save_favorite_product(request, product_slug):
+    """Додавання чи видалення товару з обраних"""
+    if request.user.is_authenticated:
+        current_user = request.user
+        current_product = Product.objects.get(slug = product_slug)
+        favorite_products = FavoriteProducts.objects.filter(user=current_user)
+
+
+        if current_product in [i.product for i in favorite_products]:
+            fav_product = FavoriteProducts.objects.get(user=current_user, product=current_product)
+            fav_product.delete()
+        else:
+            FavoriteProducts.objects.create(user=current_user, product=current_product)
+
+        next_page = request.META.get('HTTP_REFERER','category_detail')
+        return redirect(next_page)
 
 
 

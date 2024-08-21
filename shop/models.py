@@ -111,4 +111,10 @@ class FavoriteProducts(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Користувач')
     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='Товар')
 
+    def __str__(self):
+        return self.product.title
+    
+    class Meta:    
+        verbose_name = 'Обраний товар'
+        verbose_name_plural = 'Обрані товари'
 
