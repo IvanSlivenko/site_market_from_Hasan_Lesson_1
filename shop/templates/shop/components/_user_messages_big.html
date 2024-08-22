@@ -1,0 +1,26 @@
+{% if messages %}
+    <div class="container" style=
+    "
+    height: 15rem;
+    margin-bottom: 1rem;
+    border: 1px solid black;
+    border-radius: 4px;
+    color: white;
+    background: gray;
+    "
+    
+    >
+        {% for message in messages  %}
+        <div class="alert alert-{% if message.tags == 'error' %} danger {% else %} {{ message.tags }} {% endif %}"
+            style="
+
+                height: 100;
+                font-size: 3rem;
+
+            "
+            >
+            {{  message }}
+        </div>
+        {% endfor %}
+    </div>
+{% endif %}

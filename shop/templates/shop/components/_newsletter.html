@@ -1,16 +1,24 @@
 {% load static %}
 <section class="py-5">
-    <div class="container p-0">
+    <div class="container p-0" style="width: 100%;">
       <div class="row gy-3">
         <div class="col-lg-6">
-          <h5 class="text-uppercase">Let's be friends!</h5>
-          <p class="text-sm text-muted mb-0">Nisi nisi tempor consequat laboris nisi.</p>
+          <h5 class="text-uppercase">Підписка</h5>
+          <p class="text-sm text-muted mb-0">Підпишіться, щоб знати про акції та новинки</p>
         </div>
-        <div class="col-lg-6">
-          <form action="#">
+        <div class="col-lg-6" 
+          style="
+          width: 100%;
+          "
+        >
+          <form action="{% url 'save_subscribers' %}" method="post">
+            {% csrf_token %}
             <div class="input-group">
-              <input class="form-control form-control-lg" type="email" placeholder="Enter your email address" aria-describedby="button-addon2">
-              <button class="btn btn-dark" id="button-addon2" type="submit">Subscribe</button>
+              <input name = "email" class="form-control form-control-lg" type="email" placeholder="Вкажіть ваш email" aria-describedby="button-addon2">
+              <input name = "phone_number" class="form-control form-control-lg" type="phone2numeric" placeholder="приклад тел. номер : 0674708721" aria-describedby="button-addon2">
+              <input name = "viber_number" class="form-control form-control-lg" type="phone2numeric" placeholder="приклад Viber. номер : 0674708721" aria-describedby="button-addon2">
+              <input name = "telegram_number" class="form-control form-control-lg" type="phone2numeric" placeholder="приклад Telegram. номер : 0674708721" aria-describedby="button-addon2">
+              <button class="btn btn-dark" id="button-addon2" type="submit">Підписатись</button>
             </div>
           </form>
         </div>

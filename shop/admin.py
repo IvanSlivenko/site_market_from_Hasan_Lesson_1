@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Product, Category, Gallery, Review
+from .models import Product, Category, Gallery, Review, Emails
 from django.utils.safestring import mark_safe
 
 
@@ -74,6 +74,28 @@ class ReviewAdmin(admin.ModelAdmin):
         'created_at'
         )
     
+
+@admin.register(Emails)
+class ReviewMail(admin.ModelAdmin):
+    """Відображення Emai в адмінці"""
+    list_display=(
+        'pk',
+        'mail',
+        'user',
+        'phone_number',
+        'viber_number',
+        'telegram_number',
+
+    )
+    readonly_fields=(
+        'pk',
+        'mail',
+        'user',
+        'phone_number',
+        'viber_number',
+        'telegram_number',
+        )
+
 
     
 

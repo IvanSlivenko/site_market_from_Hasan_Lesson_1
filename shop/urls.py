@@ -14,4 +14,5 @@ urlpatterns = [
     path('save_review/<int:product_pk>', save_review, name='save_review'),
     path('add_favorite/<slug:product_slug>/', save_favorite_product, name='add_favorite'),
     path('user_favorits/',FavoriteProductsViews.as_view(), name='favorite_product_page'),
+    path('save_email/',save_subscribers, name='save_subscribers'),
 ]

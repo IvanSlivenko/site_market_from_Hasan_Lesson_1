@@ -118,3 +118,16 @@ class FavoriteProducts(models.Model):
         verbose_name = 'Обраний товар'
         verbose_name_plural = 'Обрані товари'
 
+class Emails(models.Model):
+    """Почтова розсилка"""
+    mail = models.EmailField(unique=True, verbose_name='Електронна пошта')          
+    user = models.ForeignKey(User, on_delete=models.CASCADE,  blank=True,  null=True,
+                             verbose_name='Адресат')
+    phone_number = models.TextField(max_length=9, blank=True,  null=True,  verbose_name='Номер телефону')
+    viber_number = models.TextField(max_length=9, blank=True,  null=True,  verbose_name='Номер Вайбер')
+    telegram_number = models.TextField(max_length=9, blank=True,  null=True,  verbose_name='Номер Телеграм')  
+    
+    class Meta:    
+        verbose_name = 'Електронна пошта'
+        verbose_name_plural = 'Електронні пошти'
+    

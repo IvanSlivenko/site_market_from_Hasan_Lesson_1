@@ -4,9 +4,10 @@ from django.shortcuts import get_object_or_404, render, redirect
 from  django.views.generic import ListView, DetailView
 from django.contrib.auth import login, logout
 from django.contrib import messages
+from django.db.utils import IntegrityError
 
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Category, Product, Review, FavoriteProducts
+from .models import Category, Product, Review, FavoriteProducts, Emails
 from .forms import FeedbackForm, LoginForm, RegistrationForm, ReviewForm
 
 class Index(ListView):
@@ -101,7 +102,7 @@ def login_registration(request):
               'registration_form': RegistrationForm
               }
 
-    return render (request, 'shop/login_requestion.html', context)
+    return render (request, 'shop/login_registration.html', context)
 
 def feedback(request):
     context= {'title': 'Відправити відгук',
@@ -195,6 +196,38 @@ class FavoriteProductsViews(LoginRequiredMixin,ListView):
         favs = FavoriteProducts.objects.filter(user=user)
         products = [i.product for i in favs] 
         return  products
+    
+
+def save_subscribers(request):
+    """Збирач поштових адрес"""
+    email = request.POST.get('email')
+    user = request.user if request.user.is_authenticated else None
+    phone_number=request.POST.get('phone_number')
+    viber_number=request.POST.get('viber_number')
+    telegram_number=request.POST.get('telegram_number')
+    if email:
+        try:
+            Emails.objects.create(
+                mail=email, 
+                user=user, 
+                phone_number=phone_number,
+                viber_number=viber_number,
+                telegram_number=telegram_number
+
+                )
+            messages.info(request, 'Дякуємо ваші данні отримані, будемо раді повідомляти вас про новинки та акції')
+        # except Exception as E:
+
+        except IntegrityError:
+            # print(E.__class__)
+            messages.error(request, "Такий email вже зареєстрований, спробуйте інший email" ) 
+    return redirect('index')        
+            
+
+
+
+
+
     
 
     
