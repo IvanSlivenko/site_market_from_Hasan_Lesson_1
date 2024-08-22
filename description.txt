@@ -82,7 +82,8 @@ pip freeze requirements.txt
 ------------------------------------ Part 5 
 https://youtu.be/vXyUggwyv6k
 
-
+password_smtp superumanproger@gmail.com
+hqhu fwfd sbbo fnvw
 
 =======================================
-01 : 13 : 59
+01 : 27 : 27
