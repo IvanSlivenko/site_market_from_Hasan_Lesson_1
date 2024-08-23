@@ -221,7 +221,10 @@ def save_subscribers(request):
         except IntegrityError:
             # print(E.__class__)
             messages.error(request, "Такий email вже зареєстрований, спробуйте інший email" ) 
-    return redirect('index')        
+    return redirect('index')   
+
+def send_mail_to_subscribesrs(): 
+    pass   
             
 
 
