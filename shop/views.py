@@ -223,8 +223,29 @@ def save_subscribers(request):
             messages.error(request, "Такий email вже зареєстрований, спробуйте інший email" ) 
     return redirect('index')   
 
-def send_mail_to_subscribesrs(): 
-    pass   
+def send_mail_to_subscribesrs(request): 
+    """Відправка листів підписникам"""
+    from conf import settings
+    from django.core.mail import send_mail
+    if request.method == 'POST':
+        text = request.POST.get('text')
+        mail_lists=Emails.objects.all()
+        for email in mail_lists:
+            email_address = email.mail  # Отримуємо адресу електронної пошти з об'єкта
+            send_mail(
+                subject='Акція',
+                message=text,
+                from_email=settings.EMAIL_HOST_USER,  # Від кого
+                recipient_list=[email_address],  # До кого
+                fail_silently=False,
+            )
+            print(f'Повідомлення відправлене на пошту {email_address}-----------------{bool(send_mail)}')
+    context = {'title':'Спамер',}
+    return render(request,'shop/send_mail.html', context )    
+
+
+
+
             
 
 

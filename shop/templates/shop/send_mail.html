@@ -14,9 +14,9 @@
 
         "
     >
-        <h3>Текст пошти</h3>
+        <h3>Текст листа</h3>
         <form 
-                action="" 
+                action="{% url 'send_mail' %}" 
                 method="post"
                 enctype="multipart/form-data"
         >
@@ -37,7 +37,7 @@
     </div>
 </div>
 {% else %}
-    <meta http-equiv="Refresh" content=" 0; url={% 'index' %}"/>
+    <meta http-equiv="Refresh" content="0; url={% url 'index' %}"/>
 {% endif %}
 
 
