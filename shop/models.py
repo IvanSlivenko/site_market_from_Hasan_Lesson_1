@@ -131,3 +131,20 @@ class Emails(models.Model):
         verbose_name = 'Електронна пошта'
         verbose_name_plural = 'Електронні пошти'
     
+class Customer(models.Model):
+    """Контактна інформація замовника"""
+    user = models.OneToOneField(User, models.SET_NULL, blank=True, null=True, verbose_name='Користувач')
+    first_name = models.CharField(max_length=255, verbose_name="Ім'я")
+    last_name = models.CharField(max_length=255, verbose_name='Прізвище')
+    email = models.EmailField(verbose_name='Електронна пошта')
+    phone = models.CharField(max_length=255, verbose_name='Контактний номер')
+
+    def __str__(self):
+        return self.first_name
+    
+    class Meta:
+        verbose_name = 'Покупець'
+        verbose_name_plural = 'Покупці'
+
+        
+

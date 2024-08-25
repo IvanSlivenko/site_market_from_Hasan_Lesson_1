@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Product, Category, Gallery, Review, Emails
+from .models import Product, Category, Gallery, Review, Emails, Customer
 from django.utils.safestring import mark_safe
 
 
@@ -96,6 +96,18 @@ class ReviewMail(admin.ModelAdmin):
         'telegram_number',
         )
 
+# @admin.register(Customer)
+# class CustomerAdmin(admin.ModelAdmin):
+#     """Відображення Покупців в адмінці"""
+#     list_display=(
+#         'pk',
+#         'user',
+#         'first_name',
+#         'last_name',
+#         'email',
+#         'phone',
+
+#     )
 
     
 
