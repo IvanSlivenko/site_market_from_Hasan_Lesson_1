@@ -146,5 +146,17 @@ class Customer(models.Model):
         verbose_name = 'Покупець'
         verbose_name_plural = 'Покупці'
 
-        
+class Order(models.Model):
+    """Кошик"""
+    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата створення')
+    is_completed = models.BooleanField(default=False, verbose_name='Завершено')
+    
+
+
+class OrderProduct(models.Model):
+    """Прив'язка продукта до корзини, стрічки товарів"""        
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
+    order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True, related_name='ordered')
+
 
