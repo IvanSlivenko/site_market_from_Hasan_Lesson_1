@@ -1,7 +1,9 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserModel
 
-from .models import Category, Product, Gallery, Review
+from .models import Category, Product, Gallery, Review, Emails, Customer, \
+Order, OrderProduct, ShippingAddress
+
 
 class LoginForm(AuthenticationForm):
     """Аутентифікація користувача"""
@@ -55,4 +57,49 @@ class ReviewForm(forms.ModelForm):
                                             }),                                           
         }
 
+class CustomerForm(forms.ModelForm):
+    """Контактна інформація"""
+    class Meta:
+        model = Customer
+        fields = {
+            'first_name',
+            'last_name',
+            'email',
+            'phone',
 
+            }
+        widgets={
+            'first_name': forms.TextInput(attrs={'class': 'form-control',
+                                            'placeholder': "Ваше ім'я"
+                                            }),
+            'last_name': forms.TextInput(attrs={'class': 'form-control',
+                                            'placeholder': "Ваше прізвище"
+                                            }),
+            'email': forms.EmailInput(attrs={'class': 'form-control',
+                                            'placeholder': "Ваш email"
+                                            }),
+            'phone': forms.TextInput(attrs={'class': 'form-control',
+                                            'placeholder': "Ваш номер телефону"
+                                            }),                                                                 
+
+            }
+
+class ShippingForm(forms.ModelForm):
+    """Адреса доставки"""
+
+    class Meta:
+        model = ShippingAddress
+        fields = (
+            'sity',
+            'state',
+            'street',
+        )
+        widgets={
+            'sity': forms.Select(attrs={'class': 'form-control',
+                                            'placeholder': "Місто"}), 
+            'state': forms.Select(attrs={'class': 'form-control',
+                                'placeholder': "Район"}), 
+            'street': forms.TextInput(attrs={'class': 'form-control',
+                                            'placeholder': "Вулиця/Будинок/Квартира"
+                                            }),                                                     
+        }

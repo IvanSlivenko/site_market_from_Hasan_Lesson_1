@@ -8,7 +8,8 @@ from django.db.utils import IntegrityError
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Category, Product, Review, FavoriteProducts, Emails
-from .forms import FeedbackForm, LoginForm, RegistrationForm, ReviewForm
+from .forms import FeedbackForm, LoginForm, RegistrationForm, ReviewForm, \
+CustomerForm, ShippingForm
 
 class Index(ListView):
     """Головна сторінка"""
@@ -241,7 +242,20 @@ def send_mail_to_subscribesrs(request):
             )
             print(f'Повідомлення відправлене на пошту {email_address}-----------------{bool(send_mail)}')
     context = {'title':'Спамер',}
-    return render(request,'shop/send_mail.html', context )    
+    return render(request,'shop/send_mail.html', context ) 
+
+
+def cart(request):
+    """Сторінка Кошика"""
+    return render(request, 'shop/cart.html')
+
+
+def to_cart(request, product_id, action):
+    """додати товар до Кошика"""
+    return redirect('cart')
+
+
+
 
 
 

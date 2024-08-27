@@ -151,12 +151,84 @@ class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата створення')
     is_completed = models.BooleanField(default=False, verbose_name='Завершено')
+    shipping = models.BooleanField(default=True, verbose_name='Доставка')
+
+    def __str__(self):
+        return str(self.pk)
     
+    class Meta:
+        verbose_name = 'Замовлення'
+        verbose_name_plural = 'Список замовлень'
+
+    @property
+    def get_cart_total_price(self):
+        """Для отримання суми товарів в кошику"""
+        order_products = self.ordered.all()
+        total_price = sum([product.get_total_price for product in order_products])
+        return total_price
+    
+    @property
+    def get_cart_total_quantity(self):
+        """Для отримання кількості товарів з корзини"""
+        order_products = self.ordered.all()
+        total_quantity = sum([product.quantity for product in order_products])
+        return total_quantity
 
 
 class OrderProduct(models.Model):
     """Прив'язка продукта до корзини, стрічки товарів"""        
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True, related_name='ordered')
+    quantity = models.IntegerField(default=0, null=True, blank=True)
+    addet_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = 'Товар в замовленні'
+        verbose_name_plural = 'Товари в замовленні'
+
+    @property
+    def get_total_price(self):
+        """Загальна вартість всіх товарів в корзині"""
+        total_price = self.product.price * self.quantity
+        return total_price  
+         
+class ShippingAddress(models.Model):
+    """Адреса доставки"""
+    SITYS=(
+        ('1','Умань'),
+        ('2','Тальне'),
+        ('3','Катеринопіль'),
+        ('4','Христинівка'),
+        ('5','Ульянівка'),
+        ('6','Голованівськ'),
+    )
+
+    STATES=(
+        ('1','Уманський'),
+        ('2','Тальнівський'),
+        ('3','Катеринопільський'),
+        ('4','Христинівський'),
+        ('5','Ульянівський'),
+        ('6','Голованівський'),
+    )
+
+    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
+    order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
+    sity = models.CharField(max_length=255,choices=SITYS)
+    state = models.CharField(max_length=255,choices=STATES)
+    street = models.CharField(max_length=255)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.street
+    
+    class Meta:
+        verbose_name = 'Адреса доставки'
+        verbose_name_plural = 'Адреси доставки'
+
+    
+
+
+
 
 

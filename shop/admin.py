@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Product, Category, Gallery, Review, Emails, Customer
+from .models import Product, Category, Gallery, Review, Emails, Customer, Order, OrderProduct, ShippingAddress
 from django.utils.safestring import mark_safe
 
 
@@ -96,18 +96,94 @@ class ReviewMail(admin.ModelAdmin):
         'telegram_number',
         )
 
-# @admin.register(Customer)
-# class CustomerAdmin(admin.ModelAdmin):
-#     """Відображення Покупців в адмінці"""
-#     list_display=(
-#         'pk',
-#         'user',
-#         'first_name',
-#         'last_name',
-#         'email',
-#         'phone',
+@admin.register(Customer)
+class ReviewCustomer(admin.ModelAdmin):
+    """Відображення Покупців в адмінці"""
+    list_display=(
+        'user',
+        'first_name',
+        'last_name',
+        'email',
+        'phone'
+    )
+    readonly_fields=(
+        'user',
+        'first_name',
+        'last_name',
+        'email',
+        'phone'
+        )
+    list_filter=(
+        'user',
+        'email',
+        'phone'
+    )
 
-#     )
+@admin.register(Order)
+class ReviewOrder(admin.ModelAdmin):
+    """Відображення Корзини в адмінці"""
+    list_display=(
+        'customer',
+        'created_at',
+        'is_completed',
+        'shipping',
+    )
+    readonly_fields=(
+        'customer',
+        'is_completed',
+        'shipping',
+        )
+    list_filter=(
+        'customer',
+        'is_completed',
+    )
+
+@admin.register(OrderProduct)
+class ReviewOrderProduct(admin.ModelAdmin):
+    """Відображення Товарів Корзини в адмінці"""
+    list_display=(
+        'product',
+        'order',
+        'quantity',
+        'addet_at',
+        )
+    readonly_fields=(
+        'product',
+        'order',
+        'quantity',
+        'addet_at',
+        )
+    list_filter=(
+        'product',
+        )
+
+@admin.register(ShippingAddress)
+class ReviewShippingAddress(admin.ModelAdmin):
+    """Відображення Адрес доставки в адмінці"""
+    list_display=(
+        'customer',
+        'order',
+        'sity',
+        'state',
+        'street',
+        'created_at',
+        )
+    readonly_fields=(
+        'customer',
+        'order',
+        'sity',
+        'state',
+        'street',
+        'created_at',
+        )
+    list_filter=(
+        'customer',
+        )     
+
+# admin.site.register(Customer)
+# admin.site.register(Order)
+# admin.site.register(OrderProduct)
+# admin.site.register(ShippingAddress)
 
     
 
