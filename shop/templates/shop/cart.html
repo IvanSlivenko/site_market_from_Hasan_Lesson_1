@@ -42,8 +42,9 @@
                     </tr>
                   </thead>
                   <tbody class="border-0">
-
-                    {% include "shop/components/cart_row.html" %}
+                    {% for item in order_products %}
+                      {% include "shop/components/cart_row.html" %}
+                    {% endfor %}
                     
                     
                   </tbody>

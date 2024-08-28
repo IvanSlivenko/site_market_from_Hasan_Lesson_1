@@ -10,6 +10,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Category, Product, Review, FavoriteProducts, Emails
 from .forms import FeedbackForm, LoginForm, RegistrationForm, ReviewForm, \
 CustomerForm, ShippingForm
+from .utils import CartForAuthenticatedUser, get_cart_data
 
 class Index(ListView):
     """Головна сторінка"""
@@ -247,12 +248,24 @@ def send_mail_to_subscribesrs(request):
 
 def cart(request):
     """Сторінка Кошика"""
-    return render(request, 'shop/cart.html')
+    cart_info = get_cart_data(request)
+    context = {
+        'order' : cart_info['order'],
+        'order_products' : cart_info['order_products'],
+        'cart_total_quantity' : cart_info['cart_total_quantity'],
+    }
+    return render(request, 'shop/cart.html', context)
 
 
 def to_cart(request, product_id, action):
     """додати товар до Кошика"""
-    return redirect('cart')
+    if request.user.is_authenticated:
+        CartForAuthenticatedUser(request, product_id, action)
+        return redirect('cart')
+    else:
+        messages.error(request, "Авторизуйтесь чи зареєструйтесь, щоб завершити придбання")
+        return redirect('login_registration')
+
 
 
 
