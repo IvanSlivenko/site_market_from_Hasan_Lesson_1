@@ -1,3 +1,4 @@
+{% load shop_tags %}
 <tr>
     <th class="ps-0 py-3 border-light" scope="row">
       <div class="d-flex align-items-center"><a class="reset-anchor d-block animsition-link" href="{% url 'product_page' item.product.slug %}"><img src="{{ item.product.get_first_photo}}" alt="..." width="70"/></a>
@@ -29,7 +30,7 @@
     
 
     <td class="p-3 align-middle border-light">
-      <p class="mb-0 small">{{ item.get_total_price }} грн.</p>
+      <p class="mb-0 small">{{ item.get_total_price|custom_number_format_2 }} грн.</p>
     </td>
     <td class="p-3 align-middle border-light"><a class="reset-anchor" href="#!"><i class="fas fa-trash-alt small text-muted"></i></a></td>
   </tr>

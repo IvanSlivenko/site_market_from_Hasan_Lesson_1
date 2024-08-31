@@ -1,9 +1,20 @@
 from django import template
 from shop.models import Category, FavoriteProducts 
 from  django.template.defaulttags import register as range_register 
-
+from django import template
 
 register = template.Library()
+
+@register.filter
+def custom_number_format_2(value):
+    try:
+        value = float(value)  # Конвертуємо значення в число
+        formatted_value = f"{value:,.2f}".replace(',', ' ').replace('.', ',')
+        return formatted_value
+    except (ValueError, TypeError):
+        return value  # Повертаємо значення без змін, якщо воно не є числом
+
+
 
 @register.simple_tag()
 def get_subcategories(category):
