@@ -1,11 +1,22 @@
 from .models import Product, OrderProduct, Order, Customer
 
+
 class CartForAuthenticatedUser:
     """Логіка корзини"""
     def __init__(self, request, product_id=None, action=None):
         self.user = request.user
         if product_id and action:
-            self.add_or_delete(product_id, action)    
+            self.add_or_delete(product_id, action)
+
+    def custom_number_format(self, value):
+        try:
+            value = float(value)
+            formatted_value = f"{value:,.2f}".replace(',', ' ').replace('.', ',')
+            print(formatted_value,'-------------------------------------------------------')
+            return formatted_value
+        except (ValueError, TypeError):
+            return value        
+         
 
     def get_cart_info(self):
         """Отримання інформації про корзину (кількість і сума товарів) і про замовника"""
@@ -14,12 +25,14 @@ class CartForAuthenticatedUser:
         order_products = order.ordered.all()
         cart_total_quantity = order.get_cart_total_quantity
         cart_total_price = order.get_cart_total_price
+        # cart_total_price = self.custom_number_format(order.get_cart_total_price)
 
         return {
             'order' : order, # id кошика
             'order_products' : order_products, # Queryset - об'єкт товарів у кошику
             'cart_total_quantity' : cart_total_quantity, # загальна кількість товарів в кошику
-            'cart_total_price' : cart_total_price, # загальна вартість товарів в кошику
+            # 'cart_total_price' : cart_total_price, # загальна вартість товарів в кошику
+            'cart_total_price' : self.custom_number_format(cart_total_price), # загальна вартість товарів в кошику
 
         }
 
