@@ -7,16 +7,7 @@ class CartForAuthenticatedUser:
     def __init__(self, request, product_id=None, action=None):
         self.user = request.user
         if product_id and action:
-            self.add_or_delete(product_id, action)
-
-    def custom_number_format(self, value):
-        try:
-            value = float(value)
-            formatted_value = f"{value:,.2f}".replace(',', ' ').replace('.', ',')
-            print(formatted_value,'-------------------------------------------------------')
-            return formatted_value
-        except (ValueError, TypeError):
-            return value        
+            self.add_or_delete(product_id, action)       
          
 
     def get_cart_info(self):

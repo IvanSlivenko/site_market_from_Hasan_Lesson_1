@@ -253,6 +253,7 @@ def cart(request):
         'order' : cart_info['order'],
         'order_products' : cart_info['order_products'],
         'cart_total_quantity' : cart_info['cart_total_quantity'],
+        'title': 'Кошик',
     }
     return render(request, 'shop/cart.html', context)
 
@@ -266,6 +267,18 @@ def to_cart(request, product_id, action):
         messages.error(request, "Авторизуйтесь чи зареєструйтесь, щоб завершити придбання")
         return redirect('login_registration')
 
+def checkout(request):
+    """Сторінка оформлення замовлення"""
+    cart_info = get_cart_data(request)
+    context = {
+        'order': cart_info['order'],
+        'order_products': cart_info['order_products'],
+        'cart_total_quantity': cart_info['cart_total_quantity'],
+        'customer_form': CustomerForm(),
+        'shipping_form': ShippingForm(),
+        'title': 'Оформлення замовлення',
+    }
+    return render(request, 'shop/checkout.html', context)
 
 
 

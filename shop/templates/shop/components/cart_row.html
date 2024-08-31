@@ -30,7 +30,7 @@
     
 
     <td class="p-3 align-middle border-light">
-      <p class="mb-0 small">{{ item.get_total_price|custom_number_format_2 }} грн.</p>
+      <p class="mb-0 small">{{ item.get_total_price|custom_number_format }} грн.</p>
     </td>
-    <td class="p-3 align-middle border-light"><a class="reset-anchor" href="#!"><i class="fas fa-trash-alt small text-muted"></i></a></td>
+    <td class="p-3 align-middle border-light"><a class="reset-anchor" href="{% url 'to_cart' item.product.pk 'remove' %}"><i class="fas fa-trash-alt small text-muted"></i></a></td>
   </tr>

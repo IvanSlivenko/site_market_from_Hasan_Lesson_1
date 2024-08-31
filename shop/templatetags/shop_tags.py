@@ -6,7 +6,7 @@ from django import template
 register = template.Library()
 
 @register.filter
-def custom_number_format_2(value):
+def custom_number_format(value):
     try:
         value = float(value)  # Конвертуємо значення в число
         formatted_value = f"{value:,.2f}".replace(',', ' ').replace('.', ',')
